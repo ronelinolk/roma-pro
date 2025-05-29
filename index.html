@@ -2,7 +2,7 @@
 <html lang="uk">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Roma-PRO</title>
   <style>
     * {
@@ -12,16 +12,22 @@
       font-family: 'Segoe UI', sans-serif;
     }
 
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
     body {
       background: #000;
       color: #fff;
-      min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       padding: 20px;
       background: linear-gradient(to bottom, #000, #1a1a1a);
+      touch-action: manipulation;
     }
 
     h1 {
@@ -51,11 +57,11 @@
 
     #pen {
       width: 100vw;
-      max-height: 100vh;
-      margin-top: 30px;
+      height: 100vh;
       position: relative;
       display: none;
       object-fit: contain;
+      z-index: 2;
     }
 
     .hidden {
@@ -67,6 +73,7 @@
       flex-direction: column;
       align-items: center;
       width: 100%;
+      z-index: 1;
     }
 
     @keyframes bounce {
@@ -81,10 +88,10 @@
 <body>
   <h1>Roma-PRO</h1>
   <div class="buttons" id="buttons">
-    <button class="btn" onclick="vibratePhone()">Вібратор ON</button>
-    <button class="btn" onclick="animatePen()">Дрочити</button>
-    <button class="btn" onclick="playSound('1.mp3')">Жосткі стони</button>
-    <button class="btn" onclick="playSound('2.mp3')">Пердеж</button>
+    <button class="btn" onclick="vibratePhone()">Включити вібрацію</button>
+    <button class="btn" onclick="animatePen()">Рухати зображення</button>
+    <button class="btn" onclick="playSound('1.mp3')">Включити звук</button>
+    <button class="btn" onclick="playSound('2.mp3')">Включити звук [2]</button>
   </div>
   <img src="pen.png" id="pen">
 
