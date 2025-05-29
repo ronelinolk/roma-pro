@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>ROMA PRO</title>
   <style>
     * {
@@ -19,14 +19,13 @@
     }
 
     body {
-      background: #000;
+      background: linear-gradient(to bottom, #000, #1a1a1a);
       color: #fff;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       padding: 20px;
-      background: linear-gradient(to bottom, #000, #1a1a1a);
       touch-action: manipulation;
     }
 
@@ -64,10 +63,6 @@
       z-index: 2;
     }
 
-    .hidden {
-      display: none !important;
-    }
-
     .buttons {
       display: flex;
       flex-direction: column;
@@ -88,26 +83,36 @@
 <body>
   <h1>Все для кайфу)</h1>
   <div class="buttons" id="buttons">
-    <button class="btn" onclick="vibratePhone()">Включити вібратор</button>
+    <button class="btn" id="vibrateBtn">Включити вібратор</button>
     <button class="btn" onclick="animatePen()">Виєбати</button>
     <button class="btn" onclick="playSound('1.mp3')">Жосткі стони</button>
     <button class="btn" onclick="playSound('2.mp3')">Пердеж</button>
   </div>
-  <img src="pen.png" id="pen">
+
+  <img src="pen.png" id="pen" />
 
   <audio id="audio1" src="1.mp3"></audio>
   <audio id="audio2" src="2.mp3"></audio>
 
   <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // Прив'язка події до кнопки після завантаження DOM
+      const vibrateBtn = document.getElementById("vibrateBtn");
+      vibrateBtn.addEventListener("click", vibratePhone);
+    });
+
     function vibratePhone() {
-      if (navigator.vibrate) {
-        navigator.vibrate(10000);
+      if ("vibrate" in navigator) {
+        // Пульсуюча вібрація: 3 рази по 200 мс з паузами
+        navigator.vibrate([200, 100, 200, 100, 200]);
+      } else {
+        alert("Ваш пристрій не підтримує вібрацію.");
       }
     }
 
     function hideButtons() {
       const btns = document.getElementById('buttons');
-      btns.parentNode.removeChild(btns);
+      if (btns) btns.parentNode.removeChild(btns);
     }
 
     function showButtons() {
@@ -115,12 +120,13 @@
       container.className = 'buttons';
       container.id = 'buttons';
       container.innerHTML = `
-        <button class="btn" onclick="vibratePhone()">Включити вібратор</button>
+        <button class="btn" id="vibrateBtn">Включити вібратор</button>
         <button class="btn" onclick="animatePen()">Виєбати</button>
         <button class="btn" onclick="playSound('1.mp3')">Жосткі стони</button>
         <button class="btn" onclick="playSound('2.mp3')">Пердеж</button>
       `;
       document.body.insertBefore(container, document.getElementById('pen'));
+      document.getElementById("vibrateBtn").addEventListener("click", vibratePhone);
     }
 
     function animatePen() {
@@ -132,7 +138,7 @@
         pen.style.display = 'none';
         pen.style.animation = '';
         showButtons();
-      }, 10000);
+      }, 6000);
     }
 
     function playSound(file) {
