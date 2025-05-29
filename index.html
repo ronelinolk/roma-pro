@@ -65,7 +65,7 @@
     }
 
     .hidden {
-      display: none;
+      display: none !important;
     }
 
     .buttons {
@@ -106,11 +106,21 @@
     }
 
     function hideButtons() {
-      document.getElementById('buttons').classList.add('hidden');
+      const btns = document.getElementById('buttons');
+      btns.parentNode.removeChild(btns);
     }
 
     function showButtons() {
-      document.getElementById('buttons').classList.remove('hidden');
+      const container = document.createElement('div');
+      container.className = 'buttons';
+      container.id = 'buttons';
+      container.innerHTML = `
+        <button class="btn" onclick="vibratePhone()">Включити вібрацію</button>
+        <button class="btn" onclick="animatePen()">Рухати зображення</button>
+        <button class="btn" onclick="playSound('1.mp3')">Включити звук</button>
+        <button class="btn" onclick="playSound('2.mp3')">Включити звук [2]</button>
+      `;
+      document.body.insertBefore(container, document.getElementById('pen'));
     }
 
     function animatePen() {
