@@ -88,10 +88,10 @@
 <body>
   <h1>Все для кайфу)</h1>
   <div class="buttons" id="buttons">
-    <button class="btn" onclick="vibratePhone()">Включити вібрацію</button>
-    <button class="btn" onclick="animatePen()">Рухати зображення</button>
-    <button class="btn" onclick="playSound('1.mp3')">Включити звук</button>
-    <button class="btn" onclick="playSound('2.mp3')">Включити звук [2]</button>
+    <button class="btn" onclick="vibratePhone()">Включити вібратор</button>
+    <button class="btn" onclick="animatePen()">Виєбати</button>
+    <button class="btn" onclick="playSound('1.mp3')">Жосткі стони</button>
+    <button class="btn" onclick="playSound('2.mp3')">Пердеж</button>
   </div>
   <img src="pen.png" id="pen">
 
@@ -115,10 +115,10 @@
       container.className = 'buttons';
       container.id = 'buttons';
       container.innerHTML = `
-        <button class="btn" onclick="vibratePhone()">Включити вібрацію</button>
-        <button class="btn" onclick="animatePen()">Рухати зображення</button>
-        <button class="btn" onclick="playSound('1.mp3')">Включити звук</button>
-        <button class="btn" onclick="playSound('2.mp3')">Включити звук [2]</button>
+        <button class="btn" onclick="vibratePhone()">Включити вібратор</button>
+        <button class="btn" onclick="animatePen()">Виєбати</button>
+        <button class="btn" onclick="playSound('1.mp3')">Жосткі стони</button>
+        <button class="btn" onclick="playSound('2.mp3')">Пердеж</button>
       `;
       document.body.insertBefore(container, document.getElementById('pen'));
     }
