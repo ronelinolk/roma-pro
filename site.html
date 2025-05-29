@@ -50,9 +50,23 @@
     }
 
     #pen {
-      width: 80px;
+      width: 100vw;
+      max-height: 100vh;
       margin-top: 30px;
       position: relative;
+      display: none;
+      object-fit: contain;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
     }
 
     @keyframes bounce {
@@ -66,10 +80,12 @@
 </head>
 <body>
   <h1>Roma-PRO</h1>
-  <button class="btn" onclick="vibratePhone()">Включити вібрацію</button>
-  <button class="btn" onclick="animatePen()">Рухати зображення</button>
-  <button class="btn" onclick="playSound('1.mp3')">Включити звук</button>
-  <button class="btn" onclick="playSound('2.mp3')">Включити звук [2]</button>
+  <div class="buttons" id="buttons">
+    <button class="btn" onclick="vibratePhone()">Вібратор ON</button>
+    <button class="btn" onclick="animatePen()">Дрочити</button>
+    <button class="btn" onclick="playSound('1.mp3')">Жосткі стони</button>
+    <button class="btn" onclick="playSound('2.mp3')">Пердеж</button>
+  </div>
   <img src="pen.png" id="pen">
 
   <audio id="audio1" src="1.mp3"></audio>
@@ -82,18 +98,34 @@
       }
     }
 
+    function hideButtons() {
+      document.getElementById('buttons').classList.add('hidden');
+    }
+
+    function showButtons() {
+      document.getElementById('buttons').classList.remove('hidden');
+    }
+
     function animatePen() {
       const pen = document.getElementById('pen');
-      pen.style.animation = 'bounce 0.6s ease-in-out 3';
-      pen.addEventListener('animationend', () => {
+      hideButtons();
+      pen.style.display = 'block';
+      pen.style.animation = 'bounce 0.6s ease-in-out 10';
+      setTimeout(() => {
+        pen.style.display = 'none';
         pen.style.animation = '';
-      }, { once: true });
+        showButtons();
+      }, 10000);
     }
 
     function playSound(file) {
+      hideButtons();
       const audio = file === '1.mp3' ? document.getElementById('audio1') : document.getElementById('audio2');
       audio.currentTime = 0;
       audio.play();
+      audio.onended = () => {
+        showButtons();
+      };
     }
   </script>
 </body>
